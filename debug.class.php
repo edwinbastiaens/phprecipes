@@ -3,15 +3,22 @@
 class Debug{
     private static $DEBUG_PRINT_ON  = false;
     private static $DEBUG_LEVEL = 1; //only print for level >= DEBUG_LEVEL.
+    private static $passed = null;
     
-    public static function getObjectContents($obj){
+    private static function getObjectContentInternal($obj){ 
         if (! isset($obj)) return "undefined";
         if (is_null($obj)) return "null";
+        
+        //prevent selfcontainment loops
+        if (in_array($obj, self::$passed))
+            return;
+        self::$passed[] = $obj;
+        
         if (is_object($obj) || is_array($obj)){
             if (is_object($obj)) $p = "->"; else $p = "[] = ";
             $out = "<ul>";
             foreach($obj as $k => $v)
-                $out .= "<li>" . $k . $p . self::getObjectContents($v) . "</li>";
+                $out .= "<li>" . $k . $p . self::getObjectContentsInternal($v) . "</li>";
             return $out . "</ul>";
         }
         if ($obj === false)
@@ -19,6 +26,11 @@ class Debug{
         if ($obj === true)
             return "true";        
         return $obj;
+    }
+    
+    public static function getObjectContents($obj){
+        self::$passed = array();
+        return self::getObjectContentInternal($obj);
     }
     
     public static function eObjectContents($obj,$debugLevel=1){
