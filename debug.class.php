@@ -5,7 +5,7 @@ class Debug{
     private static $DEBUG_LEVEL = 1; //only print for level >= DEBUG_LEVEL.
     private static $passed = null;
     
-    private static function getObjectContentInternal($obj){ 
+    private static function getObjectContentsInternal($obj){ 
         if (! isset($obj)) return "undefined";
         if (is_null($obj)) return "null";
         
@@ -30,7 +30,7 @@ class Debug{
     
     public static function getObjectContents($obj){
         self::$passed = array();
-        return self::getObjectContentInternal($obj);
+        return self::getObjectContentsInternal($obj);
     }
     
     public static function eObjectContents($obj,$debugLevel=1){
