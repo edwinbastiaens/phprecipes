@@ -28,18 +28,14 @@ class Debug{
     
     public static function e($str,$debugLevel=1,$newLine = true){
         if ($debugLevel < self::$DEBUG_LEVEL) return;
-        if (self::$DEBUG_PRINT_ON){
-            echo $str;
-            if ($newLine) echo "<br/>";
-        }
+        if (self::$DEBUG_PRINT_ON)
+            echo $str . ($newLine)? "<br/>" : "";
     }
     
     public static function g($str,$newLine = true){
         if ($debugLevel < self::$DEBUG_LEVEL) return "";
-        if (self::$DEBUG_PRINT_ON){
-            if ($newLine) return $str . "<br/>";
-            return $str;
-        }
+        if (self::$DEBUG_PRINT_ON)
+            return $str . ($newLine)?  "<br/>" : "";
         return "";
     }
     
