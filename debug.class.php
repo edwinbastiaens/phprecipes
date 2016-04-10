@@ -61,4 +61,5 @@ class Debug{
         self::$DEBUG_PRINT_ON = false;
     }
 }
-?>
+
+//end if file
