@@ -60,6 +60,10 @@ class Debug{
     public static function stopDebugging(){
         self::$DEBUG_PRINT_ON = false;
     }
+    
+    public static function abc(){
+        
+    }
 }
 
 //end if file
