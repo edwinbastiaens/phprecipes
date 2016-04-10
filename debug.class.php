@@ -61,8 +61,8 @@ class Debug{
         self::$DEBUG_PRINT_ON = false;
     }
     
-    public static function abc(){
-        
+    public static function abc($parm=1){
+        return $parm;
     }
 }
 
