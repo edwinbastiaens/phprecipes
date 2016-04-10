@@ -62,7 +62,7 @@ class Debug{
     }
     
     public static function abc($parm=1){
-        $parm +=2;
+        $parm +=3;
         return $parm;
     }
 }
