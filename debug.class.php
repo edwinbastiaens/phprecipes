@@ -5,6 +5,10 @@ class Debug{
     private static $DEBUG_LEVEL = 1; //only print for level >= DEBUG_LEVEL.
     private static $passed = null;
     
+    public static function dump($obj){
+        echo self::getObjectContents($obj);
+    }
+    
     private static function getObjectContentsInternal($obj){ 
         if (! isset($obj)) return "undefined";
         if (is_null($obj)) return "null";
