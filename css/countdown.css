@@ -1,0 +1,14 @@
+.countdown .cntd {
+    float:left;
+    background-color:#F5B505;
+    color:#EEE;
+    margin-left:10px;
+    padding:5px;
+    font-size:1.5em;
+}
+
+.countdown .countdowntxt{
+    font-size:0.8em;
+    color:#000;
+    font-weight:normal;
+}
