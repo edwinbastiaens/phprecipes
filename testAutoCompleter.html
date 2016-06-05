@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Autocompleter test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+        <SCRIPT src="js/autoCompleter.js" type="text/javascript"></SCRIPT>
+        <script src="js/jquery-ui-1.11.4.custom/jquery-ui.min.js" type="text/javascript"></script>
+        <LINK rel="stylesheet" href="http://www.freelancenetwork.be/js/jquery-ui-1.11.4.custom/jquery-ui.css" type="text/css">
+    </head>
+    <body>
+        Trefwoorden: <input name="trefwoorden" id="trefwoorden" placeholder="Trefwoorden" value=""/>
+        <script>
+            makeAutoCompleter('#trefwoorden', 'ajax/keywords.html',1);
+        </script>
+    </body>
+</html>
