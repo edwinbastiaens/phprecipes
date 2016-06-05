@@ -54,4 +54,5 @@ var CountDown = (function () {
         setInterval(my.countDown, refresh_interval);
     });
     return my;
-}())
+}());
+
