@@ -50,7 +50,34 @@ class PdfMerger
         }
         $pdf->Output();
     }
+
+    public static function getUploadForm()
+    {
+        return <<<FRM
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form method='post'>
+            <input type='hidden' name='upl' value='1' />
+            <input type='submit' />
+        </form>
+    </body>
+</html>
+FRM;
+    }
+
+    public static function processUploadForm()
+    {
+        if (! isset($_POST['upl'])){
+            return false;
+        }
+        PdfMerger::mergeDir("theplace");
+        return true;
+    }
 }
 
-PdfMerger::mergeDir("theplace");
-
+if (!PdfMerger::processUploadForm()){
+    echo PdfMerger::getUploadForm();
+}
