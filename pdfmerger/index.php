@@ -54,10 +54,27 @@ class PdfMerger
 
     public static function getUploadForm()
     {
+        $google =<<<G
+<script type="text/javascript"><!--
+    google_ad_client = "ca-pub-7137239348401468";
+    /* guyBredeBalk */
+    google_ad_slot = "7151863716";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+G;
+        
         return <<<FRM
 <!DOCTYPE html>
 <html>
     <head>
+        <title>PDF merger</title>
+        <META NAME="DESCRIPTION" CONTENT="Merge a number of pdf files into one pdf file with Tolima's online pdfmerger." />
+        <META NAME="KEYWORDS" CONTENT="pdf merger, merge pdf files,merging pdf files" />
         <META charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,21 +84,34 @@ class PdfMerger
         <div class='container'>
             <div class='row'>
                 <div class='col-md-10 col-md-offset-1'>
-                    <h1>PDF merger</h1>
+                    {$google}
+                    <h1>Online PDF merger</h1>
+                    <p>
+                    <h4>Merge a number of pdf files into one pdf file.<h4><br/>
+                    Do you have whole stack of small pdf documents?  Or you sent a list of invoices 
+                    to your accountant which he then has to print one by one.<br/>
+                    You can spare yourself or your accountant a lot of this tedious work by merging all the pdf'files together with this online pdf merger. 
+                    </p>
                     <br/>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2>Select pdf files to merge:</h2>
                         </div>
                         <div class="panel-body">
+                            
                             <form method='post' enctype="multipart/form-data">
                                 <input type='hidden' name='upl' value='1' />
                                 
                                 <input type="file" name="upload[]" multiple="" id="fileToUpload" class='btn btn-info ' ><br/>
-                                <input type='submit' class='btn btn-primary' />
+                                <input type='submit' class='btn btn-primary' value='merge' /><BR/><br/>
+                                {$google}
                             </form>
                         </div>
-                    </div>
+                    </div><br/>
+                    <a class="twitter-share-button"
+                        href="https://twitter.com/intent/tweet?text=Merge a number of pdf files into one pdf file with Tolima's online pdf merger - ">
+                      Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                 </div>
             </div>
         </div>
