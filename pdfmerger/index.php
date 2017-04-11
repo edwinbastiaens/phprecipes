@@ -18,6 +18,7 @@ class PdfMerger
                 $files[] = $sourcepath . "/" . $file;
             }
         }
+
         $pageCount = 0;
         // initiate FPDI
         $pdf = new FPDI();
@@ -109,7 +110,7 @@ FRM;
             }
         }
         //do the merge
-        PdfMerger::mergeDir("theplace");
+        PdfMerger::mergeDir($target_map);
         return true;
     }
 }
