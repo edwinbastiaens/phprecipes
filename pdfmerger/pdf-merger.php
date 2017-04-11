@@ -57,12 +57,33 @@ class PdfMerger
 <!DOCTYPE html>
 <html>
     <head>
+        <META charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        <form method='post'>
-            <input type='hidden' name='upl' value='1' />
-            <input type='submit' />
-        </form>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-10 col-md-offset-1'>
+                    <h1>PDF merger</h1>
+                    <br/>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2>Select pdf files to merge:</h2>
+                        </div>
+                        <div class="panel-body">
+                            <form method='post' enctype="multipart/form-data">
+                                <input type='hidden' name='upl' value='1' />
+                                
+                                <input type="file" name="upload[]" multiple="" id="fileToUpload" class='btn btn-info ' ><br/>
+                                <input type='submit' class='btn btn-primary' />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
 FRM;
@@ -73,6 +94,21 @@ FRM;
         if (! isset($_POST['upl'])){
             return false;
         }
+
+        //upload files
+        $target_map = "dir" . time();
+        mkdir($target_map);
+        $target_dir = $target_map . "/";
+        $total = count($_FILES['upload']['name']);
+        for($i=0; $i<$total; $i++) {
+            $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+            if ($tmpFilePath != ""){
+                $newFilePath = $target_dir . $_FILES['upload']['name'][$i];
+                if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+                }
+            }
+        }
+        //do the merge
         PdfMerger::mergeDir("theplace");
         return true;
     }
