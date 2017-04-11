@@ -2,6 +2,7 @@
 
 require_once('fpdf181/fpdf.php');
 require_once('FPDI-1.6.1/fpdi.php');
+include_once "GoogleRecaptchya.php";
 
 class PdfMerger
 {
@@ -67,7 +68,7 @@ class PdfMerger
     src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 G;
-        
+        $recap = GoogleRecaptchya::getFormField();
         return <<<FRM
 <!DOCTYPE html>
 <html>
@@ -79,7 +80,8 @@ G;
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    </head>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+   </head>
     <body>
         <div class='container'>
             <div class='row'>
@@ -103,6 +105,7 @@ G;
                                 <input type='hidden' name='upl' value='1' />
                                 
                                 <input type="file" name="upload[]" multiple="" id="fileToUpload" class='btn btn-info ' ><br/>
+                                {$recap}
                                 <input type='submit' class='btn btn-primary' value='merge' /><BR/><br/>
                                 {$google}
                             </form>
@@ -125,6 +128,11 @@ FRM;
         if (! isset($_POST['upl'])){
             return false;
         }
+        
+        if (!GoogleRecaptchya::processForm()){
+            echo "<body style='background-color:red'><h1 style='font-size:20em'>HELLO ROBOT!</h1></body>";
+            exit;
+        }
 
         //upload files
         $target_map = "dir" . time();
@@ -133,6 +141,10 @@ FRM;
         $total = count($_FILES['upload']['name']);
         for($i=0; $i<$total; $i++) {
             $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+            if ( strtoupper(pathinfo($_FILES['upload']['name'][$i])['extension']) !== "PDF") {
+                echo "<body style='background-color:red'><h1 style='font-size:20em'>ONLY PDF FILES!</h1></body>";
+                exit;
+            }
             if ($tmpFilePath != ""){
                 $newFilePath = $target_dir . $_FILES['upload']['name'][$i];
                 if (move_uploaded_file($tmpFilePath, $newFilePath)) {
