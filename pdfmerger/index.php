@@ -73,7 +73,7 @@ G;
 <html>
     <head>
         <title>PDF merger</title>
-        <META NAME="DESCRIPTION" CONTENT="Merge a number of pdf files into one pdf file with Tolima's online pdfmerger." />
+        <META NAME="DESCRIPTION" CONTENT="Merge a number of pdf files into one pdf file with Tolima's free online pdfmerger." />
         <META NAME="KEYWORDS" CONTENT="pdf merger, merge pdf files,merging pdf files" />
         <META charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,11 +85,11 @@ G;
             <div class='row'>
                 <div class='col-md-10 col-md-offset-1'>
                     {$google}
-                    <h1>Online PDF merger</h1>
+                    <h1>Free online PDF merger</h1>
                     <p>
                     <h4>Merge a number of pdf files into one pdf file.<h4><br/>
-                    Do you have whole stack of small pdf documents?  Or you sent a list of invoices 
-                    to your accountant which he then has to print one by one.<br/>
+                    Do you have to process a whole stack of small pdf documents?  Or maybe you sent a pile of invoices 
+                    to your accountant who then has to print them one by one?<br/>
                     You can spare yourself or your accountant a lot of this tedious work by merging all the pdf'files together with this online pdf merger. 
                     </p>
                     <br/>
