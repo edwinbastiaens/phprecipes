@@ -3,6 +3,7 @@
 require_once('fpdf181/fpdf.php');
 require_once('FPDI-1.6.1/fpdi.php');
 include_once "GoogleRecaptchya.php";
+include_once 'Logger.php';
 
 class PdfMerger
 {
@@ -164,5 +165,8 @@ FRM;
 }
 
 if (!PdfMerger::processUploadForm()){
+    Logger::log("open");
     echo PdfMerger::getUploadForm();
+} else {
+    Logger::log("merge");
 }
