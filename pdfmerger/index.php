@@ -29,7 +29,11 @@ class PdfMerger
             // get the page count
             $pageCount = $pdf->setSourceFile($file);
             // iterate through all pages
-            for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+            if ($_POST['modus'] == "1")
+                $pc = 1;
+            else
+                $pc = $pageCount;
+            for ($pageNo = 1; $pageNo <= $pc; $pageNo++) {
                 // import a page
                 $templateId = $pdf->importPage($pageNo);
                 // get the size of the imported page
@@ -102,9 +106,13 @@ G;
                             <form method='post' enctype="multipart/form-data">
                                 <input type='hidden' name='upl' value='1' />
                                 
-                                <input type="file" name="upload[]" multiple="" id="fileToUpload" class='btn btn-info ' ><br/>
-                                {$recap}
-                                <input type='submit' class='btn btn-primary' value='merge' /><BR/><br/>
+                                <input type="file" name="upload[]" multiple="" id="fileToUpload" class='btn btn-info form-control' ><br/>
+                                <select name='modus' class='form-control' >
+                                    <option value='all'>Using all pages of each document (default)</option>
+                                    <option value='1'>Only first page of each document</option>
+                                </select><br/><br/>
+                                {$recap}<br/>
+                                <input type='submit' class='btn btn-primary' value='Merge' /><BR/><br/>
                                 {$google}
                             </form>
                         </div>
@@ -127,10 +135,10 @@ FRM;
             return false;
         }
         
-        if (!GoogleRecaptchya::processForm()){
-            echo "<body style='background-color:red'><h1 style='font-size:20em'>HELLO ROBOT!</h1></body>";
-            exit;
-        }
+//        if (!GoogleRecaptchya::processForm()){
+//            echo "<body style='background-color:red'><h1 style='font-size:20em'>HELLO ROBOT!</h1></body>";
+//            exit;
+//        }
 
         //upload files
         $target_map = "dir" . time();
