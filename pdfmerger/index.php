@@ -56,16 +56,14 @@ class PdfMerger
     public static function getUploadForm()
     {
         $google =<<<G
-<script type="text/javascript"><!--
-    google_ad_client = "ca-pub-7137239348401468";
-    /* guyBredeBalk */
-    google_ad_slot = "7151863716";
-    google_ad_width = 728;
-    google_ad_height = 90;
-    //-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- tolima-leader -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-7137239348401468"
+     data-ad-slot="1307243290"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 G;
         $recap = GoogleRecaptchya::getFormField();
