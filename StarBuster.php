@@ -1,4 +1,40 @@
-<style>
+<?php
+class Starbuster {
+    private $idName;
+    private $nrOfStars=5;
+    public function __construct($idName, $nrOfStars=5){
+        $this->idName = $idName;
+        $this->nrOfStars = $nrOfStars;
+    }
+    
+    public function html($checkedValue=0){
+        $stars = "";
+        for ($i=$this->nrOfStars;$i>0;$i--){
+            $n = $i *2;
+            $h = $n - 1;
+            $imin1 = $i - 1;
+            if ($imin1 == 0) $imin1 = "";
+            $stars .= <<<STR
+                <input type="radio" id="{$this->idName}star{$i}" name="{$this->idName}" value="{$n}" />
+                <label class = "full" for="{$this->idName}star{$i}" title="{$n}"></label>
+                <input type="radio" id="{$this->idName}star{$imin1}half" name="{$this->idName}" value="{$h}" />
+                <label class = "half" for="{$this->idName}star{$imin1}half" title="{$h}"></label>
+
+STR;
+        }
+        return <<<R
+        <fieldset class="rating">
+{$stars}
+        </fieldset>
+R;
+    }
+    public function process(){
+        if (! isset($_POST[$this->idName])) { return 0;}
+        return $_POST[$this->idName];
+    }
+    
+    public static function style(){
+        return <<<STL
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 fieldset, label { margin: 0; padding: 0; }
@@ -18,11 +54,11 @@ h1 { font-size: 1.5em; margin: 10px; }
   font-size: 1.25em;
   font-family: FontAwesome;
   display: inline-block;
-  content: "\f005";
+  content: "\\f005";
 }
 
 .rating > .half:before { 
-  content: "\f089";
+  content: "\\f089";
   position: absolute;
 }
 
@@ -40,47 +76,22 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
-</style>
-<?php
-class Starbuster {
-    private $idName;
-    public function __construct($idName){
-        $this->idName = $idName;
-    }
-    
-    public function html(){
-        $stars = "";
-        for ($i=5;$i>0;$i--){
-            $n = $i *2;
-            $h = $n - 1;
-            $imin1 = $i - 1;
-            if ($imin1 == 0) $imin1 = "";
-            $stars .= <<<STR
-                <input type="radio" id="star{$i}" name="{$this->idName}" value="{$n}" />
-                <label class = "full" for="star{$i}" title="{$n}"></label>
-                <input type="radio" id="star{$imin1}half" name="{$this->idName}" value="{$h}" />
-                <label class = "half" for="star{$imin1}half" title="{$h}"></label>
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
 
-STR;
-        }
-        return <<<R
-        <fieldset class="rating">
-{$stars}
-        </fieldset>
-R;
-    }
-    public function process(){
-        if (! isset($_POST[$this->idName])) { return 0;}
-        return $_POST[$this->idName];
+STL;
     }
 }
-
-$star = new Starbuster("aap");
-echo $star->process();
 ?>
-<h1>Pure CSS Star Rating Widget</h1>
+<style>
+<?php 
+$star1 = new Starbuster("aap");
+$star2 = new Starbuster("noot",7);
+echo Starbuster::style(); ?>
+</style>
+<?php echo $star1->process(); ?><br/>
+<?php echo $star2->process(); ?><br/>
 <form method='post'>
-    <?php echo $star->html(); ?>
+    <?php echo $star1->html(); ?><br/><br/><br/><br/>
+    <?php echo $star2->html(); ?><br/><br/>
     <input type='submit'>
 </form>
