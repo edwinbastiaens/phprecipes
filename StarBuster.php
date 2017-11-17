@@ -50,29 +50,24 @@ class Starbuster {
     }
     
     public function html(){
+        $stars = "";
+        for ($i=5;$i>0;$i--){
+            $n = $i *2;
+            $h = $n - 1;
+            $imin1 = $i - 1;
+            if ($imin1 == 0) $imin1 = "";
+            $stars .= <<<STR
+                <input type="radio" id="star{$i}" name="{$this->idName}" value="{$n}" />
+                <label class = "full" for="star{$i}" title="{$n}"></label>
+                <input type="radio" id="star{$imin1}half" name="{$this->idName}" value="{$h}" />
+                <label class = "half" for="star{$imin1}half" title="{$h}"></label>
+
+STR;
+        }
         return <<<R
         <fieldset class="rating">
-    <input type="radio" id="star5" name="{$this->idName}" value="10" />
-        <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-    <input type="radio" id="star4half" name="{$this->idName}" value="9" />
-        <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-    <input type="radio" id="star4" name="{$this->idName}" value="8" />
-        <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-    <input type="radio" id="star3half" name="{$this->idName}" value="7" />
-        <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-    <input type="radio" id="star3" name="{$this->idName}" value="6" />
-        <label class = "full" for="star3" title="Meh - 3 stars"></label>
-    <input type="radio" id="star2half" name="{$this->idName}" value="5" />
-        <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-    <input type="radio" id="star2" name="{$this->idName}" value="4" />
-        <label class ="full" for="star2" title="Kinda bad - 2 stars"></label>
-    <input type="radio" id="star1half" name="{$this->idName}" value="3"/>
-        <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-    <input type="radio" id="star1" name="{$this->idName}" value="2" />
-        <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <input type="radio" id="starhalf" name="{$this->idName}" value="1" />
-        <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-</fieldset>
+{$stars}
+        </fieldset>
 R;
     }
     public function process(){
