@@ -14,10 +14,16 @@ class Starbuster {
             $h = $n - 1;
             $imin1 = $i - 1;
             if ($imin1 == 0) $imin1 = "";
+            $checkedn = ($n == $checkedValue)? " checked " : "";
+            $checkedh = ($h == $checkedValue)? " checked " : "";
             $stars .= <<<STR
-                <input type="radio" id="{$this->idName}star{$i}" name="{$this->idName}" value="{$n}" />
+                <input type="radio" 
+                    {$checkedn}
+                    id="{$this->idName}star{$i}" 
+                    name="{$this->idName}" 
+                    value="{$n}" />
                 <label class = "full" for="{$this->idName}star{$i}" title="{$n}"></label>
-                <input type="radio" id="{$this->idName}star{$imin1}half" name="{$this->idName}" value="{$h}" />
+                <input type="radio" {$checkedh} id="{$this->idName}star{$imin1}half" name="{$this->idName}" value="{$h}" />
                 <label class = "half" for="{$this->idName}star{$imin1}half" title="{$h}"></label>
 
 STR;
@@ -28,8 +34,8 @@ STR;
         </fieldset>
 R;
     }
-    public function process(){
-        if (! isset($_POST[$this->idName])) { return 0;}
+    public function userInput(){
+        if (! isset($_POST[$this->idName])) { return null;}
         return $_POST[$this->idName];
     }
     
@@ -88,10 +94,8 @@ $star1 = new Starbuster("aap");
 $star2 = new Starbuster("noot",7);
 echo Starbuster::style(); ?>
 </style>
-<?php echo $star1->process(); ?><br/>
-<?php echo $star2->process(); ?><br/>
 <form method='post'>
-    <?php echo $star1->html(); ?><br/><br/><br/><br/>
-    <?php echo $star2->html(); ?><br/><br/>
+    <?php echo $star1->html($star1->userInput()); ?><br/><br/><br/><br/>
+    <?php echo $star2->html($star2->userInput()); ?><br/><br/>
     <input type='submit'>
 </form>
