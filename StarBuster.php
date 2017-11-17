@@ -2,11 +2,23 @@
 class Starbuster {
     private $idName;
     private $nrOfStars=5;
+
+    /**
+     * create starbuster
+     * @param type $idName
+     * @param type $nrOfStars
+     */
     public function __construct($idName, $nrOfStars=5){
         $this->idName = $idName;
         $this->nrOfStars = $nrOfStars;
     }
-    
+
+    /**
+     * generate form input field
+     * use checkedvalue if you want to pass a predetermined value
+     * @param type $checkedValue
+     * @return type
+     */
     public function html($checkedValue=0){
         $stars = "";
         for ($i=$this->nrOfStars;$i>0;$i--){
@@ -34,11 +46,31 @@ STR;
         </fieldset>
 R;
     }
-    public function userInput(){
-        if (! isset($_POST[$this->idName])) { return null;}
-        return $_POST[$this->idName];
+
+    /**
+     * get the user input after form-submit.
+     * returns null in case no form-submit.
+     * @param type $method
+     * @return type
+     */
+    public function userInput($method='POST'){
+        if ($method == 'POST'){
+            if (! isset($_POST[$this->idName])) { return null;}
+            return $_POST[$this->idName];
+        } else if ($method == 'GET') {
+            if (! isset($_GET[$this->idName])) { return null;}
+            return $_GET[$this->idName];
+        }
     }
-    
+
+    /**
+     * Use this static function to provide the necessary styles to make it work.
+     * Important:
+     * Must do this in order to work
+     * Use only once
+     * 
+     * @return type
+     */
     public static function style(){
         return <<<STL
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
@@ -89,11 +121,12 @@ STL;
 }
 ?>
 <style>
-<?php 
+<?php echo Starbuster::style(); ?>
+</style>
+<?php
 $star1 = new Starbuster("aap");
 $star2 = new Starbuster("noot",7);
-echo Starbuster::style(); ?>
-</style>
+?>
 <form method='post'>
     <?php echo $star1->html($star1->userInput()); ?><br/><br/><br/><br/>
     <?php echo $star2->html($star2->userInput()); ?><br/><br/>
