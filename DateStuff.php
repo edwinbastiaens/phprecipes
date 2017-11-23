@@ -88,10 +88,14 @@ class DateStuff {
     }    
 }
 
+/*
+ * Example code
+ 
 echo DateStuff::tomorrow('d/m/Y');
-
 $days = DateStuff::daysTillWeekday(0,'d/m/Y');
 var_dump($days);
 $d = DateStuff::daysTillEndOfMonth('d/m/Y');
 var_dump($d);
 var_dump(DateStuff::weekDay(DateStuff::today()));
+
+*/
